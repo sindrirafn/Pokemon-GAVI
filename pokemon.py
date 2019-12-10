@@ -9,4 +9,4 @@ pokeFight = pokemonDict.pokeFightDict()
 moveDict = movesReader.import_moves()
 
 print(poke['Pikachu'])
-print(pokeFight['Pikachu'])
+print(pokeFight['Pikachu']['moves'][42])

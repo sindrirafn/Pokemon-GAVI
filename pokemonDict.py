@@ -61,6 +61,7 @@ def pokeDict():
 
 def pokeFightDict():
     import csv
+    import re
     f = open('pokemon-2.csv')
     dreader = csv.DictReader(f, delimiter=',')
     pokeFightData = []
@@ -101,7 +102,8 @@ def pokeFightDict():
                     'against_psychic': 0,
                     'against_rock': 0,
                     'against_steel': 0,
-                    'against_water': 0,}
+                    'against_water': 0,
+                    'moves': []}
 
     for i in pokeFightData:
         tempName = i['name']
@@ -125,5 +127,27 @@ def pokeFightDict():
         pokeFightDict[tempName]['against_steel'] = float(i['against_steel'])
         pokeFightDict[tempName]['against_water'] = float(i['against_water'])
         
-    return pokeFightDict
+    f = open('pokemon-data.csv')
+    dreader = csv.DictReader(f, delimiter=';')
+    pokeMovesData = []
+    for i in dreader:
+        pokeMovesData.append(i)
+    f.close()
 
+    
+    for i in pokeMovesData:
+        tempName = i['Name']
+        if tempName in name2_list:
+            moves = i['Moves'][1:len(i['Moves'])-1]
+            tempSpl = moves.split(', ')
+            for move in tempSpl:
+                l = len(move) - 1
+                move = move[1:l]
+                pokeFightDict[tempName]['moves'].append(move)
+        
+            """
+            for k in movesTemp:
+                pokeFightDict[tempName]['moves'].add(k)
+                #pokeFightDict[tempName]['moves'] = i['Moves']
+             """
+    return pokeFightDict

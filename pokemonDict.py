@@ -1,4 +1,4 @@
-def pokeDict(data):
+def pokeDict(pokeData):
     #,Name,Type 1,Type 2,HP,Attack,Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary
     name_list = []
     for i in data:

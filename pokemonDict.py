@@ -1,4 +1,16 @@
-def pokeDict(pokeData):
+def pokeDict():
+    import csv
+    f = open('pokemon.csv')
+    dreader = csv.DictReader(f, delimiter=',')
+    gen1 = 0
+    pokeData = []
+    for i in dreader:
+        pokeData.append(i)
+        if gen1 == 167:
+            break
+        gen1 += 1
+
+    f.close()
     #,Name,Type 1,Type 2,HP,Attack,Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary
     name_list = []
     for i in pokeData:

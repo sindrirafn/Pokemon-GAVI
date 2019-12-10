@@ -1,5 +1,6 @@
 import csv
 import pokemonDict
+import movesReader
 
 f = open('pokemon.csv')
 dreader = csv.DictReader(f, delimiter=',')
@@ -14,3 +15,5 @@ for i in dreader:
 f.close()
 
 poke = pokemonDict.pokeDict(pokeData)
+
+moveDict = movesReader.import_moves()

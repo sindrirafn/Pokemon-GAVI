@@ -46,3 +46,5 @@ def pokeDict(data):
             pokeDict[tempName]['legendary'] = tempLeg
             pokeID += 1
             return pokeDict
+
+            #penis

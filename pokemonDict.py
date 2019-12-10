@@ -1,7 +1,7 @@
 def pokeDict(pokeData):
     #,Name,Type 1,Type 2,HP,Attack,Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary
     name_list = []
-    for i in data:
+    for i in pokeData:
         name = i['Name']
         if 'Mega' not in name:
             name_list.append(name)
@@ -20,7 +20,7 @@ def pokeDict(pokeData):
                     'legendary': False}
 
     pokeID = 1
-    for i in data:
+    for i in pokeData:
         name = i['Name']
         if 'Mega' not in name:
             tempName = i['Name']

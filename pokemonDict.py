@@ -39,12 +39,12 @@ def pokeDict():
             tempID = pokeID
             tempType1 = i['Type 1']
             tempType2 = i['Type 2']
-            tempHP = int(i['HP'])
-            tempAtt = int(i['Attack'])
-            tempDef = int(i['Defense'])
-            tempSpAtt = int(i['Sp. Atk'])
-            tempSpDef = int(i['Sp. Def'])
-            tempSpeed = int(i['Speed'])
+            tempHP = float(i['HP'])
+            tempAtt = float(i['Attack'])
+            tempDef = float(i['Defense'])
+            tempSpAtt = float(i['Sp. Atk'])
+            tempSpDef = float(i['Sp. Def'])
+            tempSpeed = float(i['Speed'])
             tempLeg = i['Legendary']
             pokeDict[tempName]['id'] = tempID
             pokeDict[tempName]['type1'] = tempType1
@@ -67,7 +67,7 @@ def pokeFightDict():
     gen1 = 1
     for i in dreader:
         pokeFightData.append(i)
-        gen += 1
+        gen1 += 1
         if gen1 == 151:
             break
     f.close()
@@ -105,25 +105,25 @@ def pokeFightDict():
 
     for i in pokeFightData:
         tempName = i['name']
-        pokeFightDict[tempName]['id'] = i['pokedex_number']
-        pokeFightDict[tempName]['against_bug'] = i['against_bug']
-        pokeFightDict[tempName]['against_dark'] = i['against_dark']
-        pokeFightDict[tempName]['against_dragon'] = i['against_dragon']
-        pokeFightDict[tempName]['against_electric'] = i['against_electric']
-        pokeFightDict[tempName]['against_fairy'] = i['against_fairy']
-        pokeFightDict[tempName]['against_fight'] = i['against_fight']
-        pokeFightDict[tempName]['against_fire'] = i['against_fire']
-        pokeFightDict[tempName]['against_flying'] = i['against_flying']
-        pokeFightDict[tempName]['against_ghost'] = i['against_ghost']
-        pokeFightDict[tempName]['against_grass'] = i['against_grass']
-        pokeFightDict[tempName]['against_ground'] = i['against_ground']
-        pokeFightDict[tempName]['against_ice'] = i['against_ice']
-        pokeFightDict[tempName]['against_normal'] = i['against_normal']
-        pokeFightDict[tempName]['against_poison'] = i['against_poison']
-        pokeFightDict[tempName]['against_psychic'] = i['against_psychic']
-        pokeFightDict[tempName]['against_rock'] = i['against_rock']
-        pokeFightDict[tempName]['against_steel'] = i['against_steel']
-        pokeFightDict[tempName]['against_water'] = i['against_water']
+        pokeFightDict[tempName]['id'] = float(i['pokedex_number'])
+        pokeFightDict[tempName]['against_bug'] = float(i['against_bug'])
+        pokeFightDict[tempName]['against_dark'] = float(i['against_dark'])
+        pokeFightDict[tempName]['against_dragon'] = float(i['against_dragon'])
+        pokeFightDict[tempName]['against_electric'] = float(i['against_electric'])
+        pokeFightDict[tempName]['against_fairy'] = float(i['against_fairy'])
+        pokeFightDict[tempName]['against_fight'] = float(i['against_fight'])
+        pokeFightDict[tempName]['against_fire'] = float(i['against_fire'])
+        pokeFightDict[tempName]['against_flying'] = float(i['against_flying'])
+        pokeFightDict[tempName]['against_ghost'] = float(i['against_ghost'])
+        pokeFightDict[tempName]['against_grass'] = float(i['against_grass'])
+        pokeFightDict[tempName]['against_ground'] = float(i['against_ground'])
+        pokeFightDict[tempName]['against_ice'] = float(i['against_ice'])
+        pokeFightDict[tempName]['against_normal'] = float(i['against_normal'])
+        pokeFightDict[tempName]['against_poison'] = float(i['against_poison'])
+        pokeFightDict[tempName]['against_psychic'] = float(i['against_psychic'])
+        pokeFightDict[tempName]['against_rock'] = float(i['against_rock'])
+        pokeFightDict[tempName]['against_steel'] = float(i['against_steel'])
+        pokeFightDict[tempName]['against_water'] = float(i['against_water'])
         
     return pokeFightDict
 

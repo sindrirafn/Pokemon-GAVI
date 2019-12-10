@@ -59,4 +59,71 @@ def pokeDict():
             pokeID += 1
     return pokeDict
 
-            #penis
+def pokeFightDict():
+    import csv
+    f = open('pokemon-2.csv')
+    dreader = csv.DictReader(f, delimiter=',')
+    pokeFightData = []
+    gen1 = 1
+    for i in dreader:
+        pokeFightData.append(i)
+        gen += 1
+        if gen1 == 151:
+            break
+    f.close()
+
+    name2_list = []
+    for i in pokeFightData:
+        name = i['name']
+        name2_list.append(name)
+    #abilities,against_bug,against_dark,against_dragon,against_electric,against_fairy,against_fight,against_fire,against_flying,
+    # against_ghost,against_grass,against_ground,against_ice,against_normal,against_poison,against_psychic,against_rock,against_steel,
+    # against_water,attack,base_egg_steps,base_happiness,base_total,capture_rate,classfication,defense,experience_growth,height_m,hp,
+    # japanese_name,name,percentage_male,pokedex_number,sp_attack,sp_defense,speed,type1,type2,weight_kg,generation,is_legendary
+
+    pokeFightDict = {}
+    for p in name2_list:
+        pokeFightDict[p] = {'id': 0,
+                    'against_bug': 0,
+                    'against_dark': 0,
+                    'against_dragon': 0,
+                    'against_electric': 0,
+                    'against_fairy': 0,
+                    'against_fight': 0,
+                    'against_fire': 0,
+                    'against_flying': 0,
+                    'against_ghost': 0,
+                    'against_grass': 0,
+                    'against_ground': 0,
+                    'against_ice': 0,
+                    'against_normal': 0,
+                    'against_poison': 0,
+                    'against_psychic': 0,
+                    'against_rock': 0,
+                    'against_steel': 0,
+                    'against_water': 0,}
+
+    for i in pokeFightData:
+        tempName = i['name']
+        pokeFightDict[tempName]['id'] = i['pokedex_number']
+        pokeFightDict[tempName]['against_bug'] = i['against_bug']
+        pokeFightDict[tempName]['against_dark'] = i['against_dark']
+        pokeFightDict[tempName]['against_dragon'] = i['against_dragon']
+        pokeFightDict[tempName]['against_electric'] = i['against_electric']
+        pokeFightDict[tempName]['against_fairy'] = i['against_fairy']
+        pokeFightDict[tempName]['against_fight'] = i['against_fight']
+        pokeFightDict[tempName]['against_fire'] = i['against_fire']
+        pokeFightDict[tempName]['against_flying'] = i['against_flying']
+        pokeFightDict[tempName]['against_ghost'] = i['against_ghost']
+        pokeFightDict[tempName]['against_grass'] = i['against_grass']
+        pokeFightDict[tempName]['against_ground'] = i['against_ground']
+        pokeFightDict[tempName]['against_ice'] = i['against_ice']
+        pokeFightDict[tempName]['against_normal'] = i['against_normal']
+        pokeFightDict[tempName]['against_poison'] = i['against_poison']
+        pokeFightDict[tempName]['against_psychic'] = i['against_psychic']
+        pokeFightDict[tempName]['against_rock'] = i['against_rock']
+        pokeFightDict[tempName]['against_steel'] = i['against_steel']
+        pokeFightDict[tempName]['against_water'] = i['against_water']
+        
+    return pokeFightDict
+

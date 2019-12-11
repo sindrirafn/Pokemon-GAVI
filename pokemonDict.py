@@ -120,6 +120,3 @@ def pokeFightDict(movesGen1):
                 pokeFightDict[j+1]['moves']=list(set(pokeFightDict[j+1]['moves']))
     
     return pokeFightDict
-
-
-    def findTopMoves()

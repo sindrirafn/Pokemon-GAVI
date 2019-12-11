@@ -98,7 +98,6 @@ def pokeFightDict():
         pokeMovesData.append(i)
     f.close()
     
-    poke_id = 1
     moves = []
 
     for i in pokeMovesData:
@@ -108,7 +107,7 @@ def pokeFightDict():
                 moves = i['Moves'][1:len(i['Moves'])-1].split(', ')
                 for move in moves:
                     l = len(move) - 1
-                    move_trimmed = move[1:l]
+                    move_trimmed = move[1:l].replace("'",'')
                     pokeFightDict[j+1]['moves'].append(move_trimmed)
                 pokeFightDict[j+1]['moves']=set(pokeFightDict[j+1]['moves'])
     

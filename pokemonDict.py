@@ -68,24 +68,25 @@ def pokeFightDict():
 
     for i in pokeFightData:
         pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'],
-                    'bug' : float(i['against_bug']),
-                    'dark' : float(i['against_dark']),
-                    'dragon' : float(i['against_dragon']),
-                    'electric' : float(i['against_electric']),
-                    'fairy' : float(i['against_fairy']),
-                    'fight' : float(i['against_fight']),
-                    'fire' : float(i['against_fire']),
-                    'flying' : float(i['against_flying']),
-                    'ghost' : float(i['against_ghost']),
-                    'grass' : float(i['against_grass']),
-                    'ground' : float(i['against_ground']),
-                    'ice' : float(i['against_ice']),
-                    'normal' : float(i['against_normal']),
-                    'poison' : float(i['against_poison']),
-                    'psychic' : float(i['against_psychic']),
-                    'rock' : float(i['against_rock']),
-                    'steel' : float(i['against_steel']),
-                    'water' : float(i['against_water']),
+                    'Bug' : float(i['against_bug']),
+                    'Dark' : float(i['against_dark']),
+                    'Dragon' : float(i['against_dragon']),
+                    'Electric' : float(i['against_electric']),
+                    'Fairy' : float(i['against_fairy']),
+                    'Fight' : float(i['against_fight']),
+                    'Fire' : float(i['against_fire']),
+                    'Flying' : float(i['against_flying']),
+                    'Ghost' : float(i['against_ghost']),
+                    'Grass' : float(i['against_grass']),
+                    'Ground' : float(i['against_ground']),
+                    'Ice' : float(i['against_ice']),
+                    'Normal' : float(i['against_normal']),
+                    'Poison' : float(i['against_poison']),
+                    'Psychic' : float(i['against_psychic']),
+                    'Rock' : float(i['against_rock']),
+                    'Steel' : float(i['against_steel']),
+                    'Water' : float(i['against_water']),
+                    '' : 1,
                     'moves': []}
 
 
@@ -102,11 +103,13 @@ def pokeFightDict():
         name = i['Name']
         if name == pokeFightDict[id].get('name'):
             moves = i['Moves'][1:len(i['Moves'])-1].split(', ')
+            print(name)
             for move in moves:
                 l = len(move) - 1
                 move = move[1:l]
                 pokeFightDict[id]['moves'].append(move)
             pokeFightDict[id]['moves']=set(pokeFightDict[id]['moves'])
             id+=1
+
     
     return pokeFightDict

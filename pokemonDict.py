@@ -1,7 +1,9 @@
 import movesReader
+import csv
+import re
+from collections import Counter
 
 def pokeDict():
-    import csv
     f = open('PokemonReal.csv')
     dreader = csv.DictReader(f, delimiter=',')
     gen1 = 1
@@ -47,8 +49,6 @@ def pokeDict():
 
 
 def pokeFightDict(movesGen1):
-    import csv
-    import re
     f = open('pokemon-2.csv')
     dreader = csv.DictReader(f, delimiter=',')
     pokeFightData = []
@@ -120,3 +120,36 @@ def pokeFightDict(movesGen1):
                 pokeFightDict[j+1]['moves']=list(set(pokeFightDict[j+1]['moves']))
     
     return pokeFightDict
+
+
+def getMovesRanked(moves):
+    power = []; names = []
+    for i in moves:
+        names.append(i)
+        power.append(moves[i].get('power')*moves[i].get('acc')/100)
+    comb = list(zip(power,names))
+    comb.sort(reverse=1)
+    moves_ranked = []
+    for i in comb:
+        moves_ranked.append(i[1])
+    moves_ranked.remove('SelfDestruct')
+    moves_ranked.remove('Explosion')
+    return moves_ranked
+
+def topMoveDict(ranked_moves, pokeFight):
+    topMoveDict = {}
+    for i in pokeFight:
+        top_moves=[]
+        move_count = 0
+        for move in ranked_moves:
+            if move in pokeFight[i].get('moves'):
+                top_moves.append(move)
+                move_count += 1
+            if move_count == 3:
+                break
+        topMoveDict[i] = {
+            'name': pokeFight[i].get('name'),
+            'top_moves': top_moves
+        }
+
+    return topMoveDict

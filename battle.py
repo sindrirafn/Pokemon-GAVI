@@ -76,8 +76,3 @@ def championship():
 winners, losers, hp_remaining = championship()
 for i in range(len(winners)):
     print(winners[i], losers[i], hp_remaining[i])
-
-count = Counter(winners)
-count2 = Counter(losers)
-print(count.most_common())
-print(count2.most_common())

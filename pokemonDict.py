@@ -35,6 +35,11 @@ def pokeDict():
                     'sp_def': float(row['Sp. Def']),
                     'speed': float(row['Speed']),
                     'legendary': row['Legendary']}
+
+    pokeDict[57]['name'] = 'Primeape'
+    pokeDict[29]['name'] = 'Nidoran-F'
+    pokeDict[32]['name'] = 'Nidoran-M'
+    
     return pokeDict
 
 # ----------------------------
@@ -75,7 +80,7 @@ def pokeFightDict(movesGen1):
                     'Dragon' : float(i['against_dragon']),
                     'Electric' : float(i['against_electric']),
                     'Fairy' : float(i['against_fairy']),
-                    'Fight' : float(i['against_fight']),
+                    'Fighting' : float(i['against_fight']),
                     'Fire' : float(i['against_fire']),
                     'Flying' : float(i['against_flying']),
                     'Ghost' : float(i['against_ghost']),
@@ -88,10 +93,11 @@ def pokeFightDict(movesGen1):
                     'Rock' : float(i['against_rock']),
                     'Steel' : float(i['against_steel']),
                     'Water' : float(i['against_water']),
-                    '' : 1,
+                    '' : 1.0,
                     'moves': []}
 
-
+    pokeFightDict[29]['name'] = 'Nidoran-F'
+    pokeFightDict[32]['name'] = 'Nidoran-M'
     
     f = open('pokemon-data.csv')
     dreader = csv.DictReader(f, delimiter=';')
@@ -112,6 +118,8 @@ def pokeFightDict(movesGen1):
                     move_trimmed = move[1:l].replace("'",'')
                     if move_trimmed in movesGen1:
                         pokeFightDict[j+1]['moves'].append(move_trimmed)
-                pokeFightDict[j+1]['moves']=set(pokeFightDict[j+1]['moves'])
+                pokeFightDict[j+1]['moves']=list(set(pokeFightDict[j+1]['moves']))
     
     return pokeFightDict
+
+    

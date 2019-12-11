@@ -90,7 +90,7 @@ def pokeFightDict():
                     'moves': []}
 
 
-
+    
     f = open('pokemon-data.csv')
     dreader = csv.DictReader(f, delimiter=';')
     pokeMovesData = []
@@ -98,18 +98,18 @@ def pokeFightDict():
         pokeMovesData.append(i)
     f.close()
     
-    id = 1
-    for i in pokeMovesData:
-        name = i['Name']
-        if name == pokeFightDict[id].get('name'):
-            moves = i['Moves'][1:len(i['Moves'])-1].split(', ')
-            print(name)
-            for move in moves:
-                l = len(move) - 1
-                move = move[1:l]
-                pokeFightDict[id]['moves'].append(move)
-            pokeFightDict[id]['moves']=set(pokeFightDict[id]['moves'])
-            id+=1
+    poke_id = 1
+    moves = []
 
+    for i in pokeMovesData:
+        name = i.get('Name')
+        for j in range(len(pokeFightDict)):
+            if pokeFightDict[j+1].get('name') == name:
+                moves = i['Moves'][1:len(i['Moves'])-1].split(', ')
+                for move in moves:
+                    l = len(move) - 1
+                    move_trimmed = move[1:l]
+                    pokeFightDict[j+1]['moves'].append(move_trimmed)
+                pokeFightDict[j+1]['moves']=set(pokeFightDict[j+1]['moves'])
     
     return pokeFightDict

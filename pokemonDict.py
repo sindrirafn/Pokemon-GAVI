@@ -2,7 +2,7 @@ import movesReader
 
 def pokeDict():
     import csv
-    f = open('pokemon.csv')
+    f = open('PokemonReal.csv')
     dreader = csv.DictReader(f, delimiter=',')
     gen1 = 1
     pokeData = []
@@ -36,7 +36,6 @@ def pokeDict():
                     'speed': float(row['Speed']),
                     'legendary': row['Legendary']}
 
-    pokeDict[57]['name'] = 'Primeape'
     pokeDict[29]['name'] = 'Nidoran-F'
     pokeDict[32]['name'] = 'Nidoran-M'
     
@@ -122,4 +121,5 @@ def pokeFightDict(movesGen1):
     
     return pokeFightDict
 
-    
+
+    def findTopMoves()

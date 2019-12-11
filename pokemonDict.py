@@ -23,7 +23,7 @@ def pokeDict():
 
     pokeDict = {}
     for i ,row in enumerate(gen1_data):
-        pokeDict[i+1] = {'name': row['Name'],
+        pokeDict[i+1] = {'name': row.get('Name').replace("'",''),
                     'type1': row['Type 1'],
                     'type2': row['Type 2'],
                     'hp': float(row['HP']),
@@ -57,7 +57,7 @@ def pokeFightDict():
 
     name_list = []
     for i in pokeFightData:
-        name_list.append(i['name'])
+        name_list.append(i.get('name').replace("'",''))
 
     #abilities,against_bug,against_dark,against_dragon,against_electric,against_fairy,against_fight,against_fire,against_flying,
     # against_ghost,against_grass,against_ground,against_ice,against_normal,against_poison,against_psychic,against_rock,against_steel,
@@ -67,7 +67,7 @@ def pokeFightDict():
     pokeFightDict = {}
 
     for i in pokeFightData:
-        pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'],
+        pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),
                     'Bug' : float(i['against_bug']),
                     'Dark' : float(i['against_dark']),
                     'Dragon' : float(i['against_dragon']),
@@ -101,7 +101,7 @@ def pokeFightDict():
     moves = []
 
     for i in pokeMovesData:
-        name = i.get('Name')
+        name = i.get('Name').replace("'",'')
         for j in range(len(pokeFightDict)):
             if pokeFightDict[j+1].get('name') == name:
                 moves = i['Moves'][1:len(i['Moves'])-1].split(', ')

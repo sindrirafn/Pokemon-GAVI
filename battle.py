@@ -19,7 +19,7 @@ defence = fighterB.get('defense')
 mod = movesB.get(fighterA.get('type1')) * movesB.get(fighterA.get('type2'))
 dmg = ((((2*level/5 + 2)*attPow*attack/defence) / 50) + 2) * mod
 
-print(pokeFight[1])
+print(pokeFight[83])
 
 
 

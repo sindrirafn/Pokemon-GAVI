@@ -24,9 +24,9 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
         i = k+1
         f.write("insert into pokeMoves (id, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water, Moves) values ({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, '{}');\n".format(i, pokeFight[i]['name'], pokeFight[i]['Bug'], pokeFight[i]['Dark'], pokeFight[i]['Dragon'], pokeFight[i]['Electric'], pokeFight[i]['Fairy'], pokeFight[i]['Fire'], pokeFight[i]['Flying'], pokeFight[i]['Ghost'], pokeFight[i]['Grass'], pokeFight[i]['Ground'], pokeFight[i]['Ice'], pokeFight[i]['Normal'], pokeFight[i]['Poison'], pokeFight[i]['Psychic'], pokeFight[i]['Rock'], pokeFight[i]['Steel'], pokeFight[i]['Water'], list(pokeFight[i]['moves'])))
     
-    for k in range(len(pokeFight)):
-        i = k+1
-        f.write('insert into pokeMoves (id, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water, Moves) values ({}, "{}", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, "{}");\n'.format(i, pokeFight[i]['name'], pokeFight[i]['Bug'], pokeFight[i]['Dark'], pokeFight[i]['Dragon'], pokeFight[i]['Electric'], pokeFight[i]['Fairy'], pokeFight[i]['Fire'], pokeFight[i]['Flying'], pokeFight[i]['Ghost'], pokeFight[i]['Grass'], pokeFight[i]['Ground'], pokeFight[i]['Ice'], pokeFight[i]['Normal'], pokeFight[i]['Poison'], pokeFight[i]['Psychic'], pokeFight[i]['Rock'], pokeFight[i]['Steel'], pokeFight[i]['Water'], pokeFight[i]['moves']))
+   # for k in range(len(pokeFight)):
+    #    i = k+1
+     #   f.write('insert into pokeMoves (id, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water, Moves) values ({}, "{}", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, "{}");\n'.format(i, pokeFight[i]['name'], pokeFight[i]['Bug'], pokeFight[i]['Dark'], pokeFight[i]['Dragon'], pokeFight[i]['Electric'], pokeFight[i]['Fairy'], pokeFight[i]['Fire'], pokeFight[i]['Flying'], pokeFight[i]['Ghost'], pokeFight[i]['Grass'], pokeFight[i]['Ground'], pokeFight[i]['Ice'], pokeFight[i]['Normal'], pokeFight[i]['Poison'], pokeFight[i]['Psychic'], pokeFight[i]['Rock'], pokeFight[i]['Steel'], pokeFight[i]['Water'], pokeFight[i]['moves']))
 
     '''
     i = 1

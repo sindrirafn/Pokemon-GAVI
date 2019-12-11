@@ -2,9 +2,11 @@ import pokemonDict
 import movesReader
 
 #def pokeBattle(pokemon1_id, pokemon2_id):
-pokeInfo = pokemonDict.pokeDict()
-pokeFight = pokemonDict.pokeFightDict()
+
 moves = movesReader.import_moves()
+pokeInfo = pokemonDict.pokeDict()
+pokeFight = pokemonDict.pokeFightDict(moves)
+
 
 fighterA = pokeInfo.get(1)
 fighterB = pokeInfo.get(4)

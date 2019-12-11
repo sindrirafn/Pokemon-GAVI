@@ -1,3 +1,5 @@
+import movesReader
+
 def pokeDict():
     import csv
     f = open('pokemon.csv')
@@ -40,7 +42,7 @@ def pokeDict():
 
 
 
-def pokeFightDict():
+def pokeFightDict(movesGen1):
     import csv
     import re
     f = open('pokemon-2.csv')
@@ -99,7 +101,7 @@ def pokeFightDict():
     f.close()
     
     moves = []
-
+    #movesGen1 = movesReader.import_moves()
     for i in pokeMovesData:
         name = i.get('Name').replace("'",'')
         for j in range(len(pokeFightDict)):
@@ -108,7 +110,8 @@ def pokeFightDict():
                 for move in moves:
                     l = len(move) - 1
                     move_trimmed = move[1:l].replace("'",'')
-                    pokeFightDict[j+1]['moves'].append(move_trimmed)
+                    if move_trimmed in movesGen1:
+                        pokeFightDict[j+1]['moves'].append(move_trimmed)
                 pokeFightDict[j+1]['moves']=set(pokeFightDict[j+1]['moves'])
     
     return pokeFightDict

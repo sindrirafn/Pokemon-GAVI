@@ -7,6 +7,7 @@ from collections import Counter
 moves = movesReader.import_moves()
 pokeInfo = pokemonDict.pokeDict()
 pokeFight = pokemonDict.pokeFightDict(moves)
+topMoves = pokemonDict.topMoveDict(moves, pokeFight)
 
 def accuracy(accuracy):
     return(random.randint(1,100)<accuracy)
@@ -25,7 +26,11 @@ def battle(A, B):
     attackA = fighterA.get('attack'); attackB = fighterB.get('attack')
     defenceA = fighterA.get('defense'); defenceB = fighterB.get('defense')
     hpA = fighterA.get('hp'); hpB = fighterB.get('hp')
-    moveA = movesA['moves'][0]; moveB = movesB['moves'][0]
+    pick = random.randint(0,len(topMoves[A].get('top_moves'))-1)
+    moveA = topMoves[A].get('top_moves')[pick] 
+    pick = random.randint(0,len(topMoves[B].get('top_moves'))-1)
+    moveB = topMoves[B].get('top_moves')[pick]
+ 
     attPowA =  moves[moveA].get('power'); attPowB =  moves[moveB].get('power')
                          
     modA = movesB.get(fighterA.get('type1')) * movesB.get(fighterA.get('type2'))

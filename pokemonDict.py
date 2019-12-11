@@ -136,7 +136,8 @@ def getMovesRanked(moves):
     moves_ranked.remove('Explosion')
     return moves_ranked
 
-def topMoveDict(ranked_moves, pokeFight):
+def topMoveDict(moves, pokeFight):
+    ranked_moves = getMovesRanked(moves)
     topMoveDict = {}
     for i in pokeFight:
         top_moves=[]

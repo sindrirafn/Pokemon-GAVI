@@ -17,7 +17,6 @@ def import_moves():
 
     for row in data:
         if int(row['Generation']) == 1:                         # tek bara generation 1
-            print(row['Name'].replace('-',''))
             moveDict[row['Name'].replace('-','')]['ID'] = cnt
             moveDict[row['Name'].replace('-','')]['type'] = row['Type']
             moveDict[row['Name'].replace('-','')]['category'] = row['Category']

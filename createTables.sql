@@ -39,15 +39,7 @@ create table pokeAgainst(
   primary key (poke_dex)
 );
 
--- create table students(
---     id serial,
---     country varchar(250) references countries(country),
---     study varchar(250) references studies(study)
---     year int,
---     female int,
---     male int,
---     primary key (id)
--- );
+
 -- insert into moves (id, type, category, pp, power, acc) values (2, 'Normal', 'Physical', 10, 15, 85);
 
 create table moves(
@@ -60,6 +52,15 @@ create table moves(
   acc float,
   primary key (id)
 );
+create table topdawg(
+  winners varchar(50) references pokemons(pokemon),
+  losers varchar(50) references pokemons(pokemon),
+  hp_remaining float,
+  primary key (winners, losers)
+);
+
+
+
 
 drop table pokeAgainst;
 drop table pokemons;

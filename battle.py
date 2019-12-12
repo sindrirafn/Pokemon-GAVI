@@ -110,7 +110,7 @@ def round_one_draft(pokeInfo):
 
 def round_one_comp(brackets): 
     losers=[]; winners_overall=[]
-    hp_remaining = []
+
     for k in range(len(brackets)):
         winners = []
         for i in range(len(brackets[k])):
@@ -142,7 +142,6 @@ def tournament_comps(contestants):
     for i in range(0,len(contestants),2):
         winner, winner_id, loser, loser_id, hp = battle(contestants[i], contestants[i+1])
         winners.append(winner_id)
-
     return winners
 
 def tournament(contestants):
@@ -151,35 +150,29 @@ def tournament(contestants):
         winners.append(tournament_comps(winners[i-1]))
     return winners
 
+def tournamentRankingAvg(n):
+    pokemon_id_list = [i for i in range(1,152)]
+    tournamentRankingDict = {}
+    for i in range(len(pokeInfo)):
+        tournamentRankingDict[i+1] = {
+            'name' : pokeInfo[i+1].get('name'),
+            'points' : 0
+            }
+    for i in range(n):
+        brackets = round_one_draft(pokeInfo)
+        contestants = round_one_comp(brackets)
+        champs = tournament(contestants)
+        champs.reverse()
+        rankings = []
+        rankings.append(champs[0])
+        for i in range(1,len(champs)):
+            rankings.append([x for x in champs[i] if x not in champs[i-1]])
+        rankings.append([x for x in contestants if x not in champs[5]])
+        #place.append([x for x in pokemon_id_list if x not in contestants)
+        rankings.reverse()
+        for i, rank in enumerate(rankings):
+            print(i,rank)
+            for j in rank:
+                tournamentRankingDict[j]['points'] += i+1
+    return tournamentRankingDict
 
-'''
-
-brackets = round_one_draft(pokeInfo)
-contestants = round_one_comp(brackets)
-champs = tournament(contestants)
-
-for i in range(3,6):
-    for j in range(len(champs[i])):
-        print(pokeInfo[champs[i][j]].get('name'))
-
-'''
-winners, losers, hp_remaining = championship()
-
-#winners_total, losers_total, hp_remaining_total = championshipRankingAvg(100)
-
-'''
-championRankingDict = {}
-for i, row in enumerate(pokeInfo):
-    championRankingDict[i] = {
-        'name' : row['name'].replace("'",''),
-        'wins' : 0,
-        'loss' : 0,
-        'win/lose_ratio' : 0.0,
-        'hp_remaining' : 0.0,
-        'hp_percentage' : 0.0}
-            
-for i in range(n):
-    winners, losers, hp_remaining = championship()
-    for i in range(len(winners)):
-        championRankingDict[winners[i]]['wins'] += 1
-'''

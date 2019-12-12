@@ -1,10 +1,12 @@
 import csv
 import pokemonDict
 import movesReader
+import battle
 
 poke = pokemonDict.pokeDict()
 moveDict = movesReader.import_moves()
 pokeFight = pokemonDict.pokeFightDict(moveDict)
+winners, losers, hp_remaining = battle.championship()
 
 
 with open('insertPokemon.SQL', 'w', newline='') as f: 
@@ -21,8 +23,10 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
     for k in moveDict:
         f.write("insert into moves (id, move, type, category, pp, power, acc) values ({}, '{}', '{}', '{}', {}, {}, {});\n".format(i, k, moveDict[k]['type'], moveDict[k]['category'], moveDict[k]['pp'], moveDict[k]['power'], moveDict[k]['acc']))
         i += 1
-    
-
+    '''
+    for i in range(len(winners)):
+        f.write("insert into topdawg (winners, losers, hp_remain) values ('{}', '{}', {});\n".format(winners[i], losers[i], hp_remaining[i])
+    '''
     
 
     

@@ -12,9 +12,9 @@ topMoves = pokemonDict.topMoveDict(moves, pokeFight)
 def accuracy(accuracy):
     return(random.randint(1,100)<accuracy)
 
-
-
 def battle(A, B): # ATH beata mogulega inn val milli att og sp_att
+    
+    special_types = ['Water', 'Grass', 'Fire', 'Ice', 'Electric', 'Psychic', 'Dragon', 'Dark']
 
     if pokeInfo.get(A)['speed'] > pokeInfo.get(B)['speed']:
         fighterA = pokeInfo.get(A); fighterB = pokeInfo.get(B)
@@ -25,24 +25,33 @@ def battle(A, B): # ATH beata mogulega inn val milli att og sp_att
         movesA = pokeFight.get(B); movesB = pokeFight.get(A)
         fighterA_id = B; fighterB_id = A
 
-    attackA = fighterA.get('attack'); attackB = fighterB.get('attack')
-    defenceA = fighterA.get('defense'); defenceB = fighterB.get('defense')
     hpA = fighterA.get('hp'); hpB = fighterB.get('hp')
     pick = random.randint(0,len(topMoves[A].get('top_moves'))-1)
     moveA = topMoves[A].get('top_moves')[pick] 
     pick = random.randint(0,len(topMoves[B].get('top_moves'))-1)
     moveB = topMoves[B].get('top_moves')[pick]
- 
+
+    if moveA.get('type') in special_types:
+        attackA = fighterA.get('sp_att'); defenceB = fighterB.get('sp_def')
+    else:
+        attackA = fighterA.get('attack'); defenceB = fighterB.get('defense')
+
+    if moveB.get('type') in special_types:
+        attackB = fighterB.get('sp_att'); defenceA = fighterA.get('sp_def')
+    else:
+        attackB = fighterB.get('attack'); defenceA = fighterA.get('defense')
+     
+
     attPowA =  moves[moveA].get('power'); attPowB =  moves[moveB].get('power')
                          
     modA = movesB.get(fighterA.get('type1')) * movesB.get(fighterA.get('type2'))
     if modA == 0.0:
-        modA = 0.25
+        modA = 0.1
     dmgA = round(((((2/5 + 2)*attPowA*attackA/defenceB) / 50) + 2) * modA)
     
     modB = movesA.get(fighterB.get('type1')) * movesA.get(fighterB.get('type2'))
     if modB == 0.0:
-        modB = 0.25
+        modB = 0.1
     dmgB = round(((((2/5 + 2)*attPowB*attackB/defenceA) / 50) + 2) * modB)
 
 
@@ -115,7 +124,7 @@ def round_one_comp(brackets):
         winners = []
         for i in range(len(brackets[k])):
             for j in range(i+1, len(brackets[k])):
-                winner, winner_id, loser, loser_id, hp = battle(brackets[k][i],brackets[k][j])
+                winner_id = battle(brackets[k][i],brackets[k][j])[1]
                 winners.append(winner_id)
         count = Counter(winners).most_common(2)
         for i  in range(len(count)):
@@ -129,7 +138,7 @@ def round_one_comp(brackets):
     winners = []
     for i in range(len(losers)-1):
         for j in range(i+1, len(losers)):
-            winner, winner_id, loser, loser_id, hp = battle(losers[i],losers[j])
+            winner_id = battle(losers[i],losers[j])[1]
             winners.append(winner_id)
     count = Counter(winners).most_common(4)
     for i  in range(len(count)):
@@ -140,7 +149,7 @@ def round_one_comp(brackets):
 def tournament_comps(contestants):
     winners = []
     for i in range(0,len(contestants),2):
-        winner, winner_id, loser, loser_id, hp = battle(contestants[i], contestants[i+1])
+        winner_id = battle(contestants[i], contestants[i+1])[1]
         winners.append(winner_id)
     return winners
 
@@ -151,7 +160,6 @@ def tournament(contestants):
     return winners
 
 def tournamentRankingDict(n):
-    pokemon_id_list = [i for i in range(1,152)]
     tournamentRankingDict = {}
     for i in range(len(pokeInfo)):
         tournamentRankingDict[i+1] = {
@@ -168,10 +176,8 @@ def tournamentRankingDict(n):
         for i in range(1,len(champs)):
             rankings.append([x for x in champs[i] if x not in champs[i-1]])
         rankings.append([x for x in contestants if x not in champs[5]])
-        #place.append([x for x in pokemon_id_list if x not in contestants)
         rankings.reverse()
         for i, rank in enumerate(rankings):
-            print(i,rank)
             for j in rank:
                 tournamentRankingDict[j]['points'] += i+1
     return tournamentRankingDict

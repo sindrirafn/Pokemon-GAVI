@@ -54,10 +54,11 @@ create table moves(
 );
 
 create table topdawg(
+  id int,
   winners varchar(50) references pokemons(pokemon),
   losers varchar(50) references pokemons(pokemon),
   hp_remaining float,
-  primary key (winners, losers)
+  primary key (id, winners, losers)
 );
 
 create table topmoves(

@@ -12,13 +12,13 @@ create table pokemons(
   sp_att float,
   sp_def float,
   speed float,
-  primary key (poke_dex)
+  primary key (pokemon)
 );
 -- insert into pokeMoves (id, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water) values (1, 'Bulbasaur', 1.0, 1.0, 1.0, 0.5, 0.5, 2.0, 2.0, 1.0, 0.25, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 0.5);
 
 create table pokeAgainst(
-  poke_dex serial references pokemons(poke_dex),
-  pokemon varchar(50),
+  poke_dex serial,
+  pokemon varchar(50) references pokemons(pokemon),
   Bug float,
   Dark float,
   Dragon float,
@@ -36,7 +36,7 @@ create table pokeAgainst(
   Rock float,
   Steel float,
   Water float,
-  primary key (poke_dex)
+  primary key (poke_dex, pokemon)
 );
 
 
@@ -50,8 +50,9 @@ create table moves(
   pp float,
   power float,
   acc float,
-  primary key (id)
+  primary key (move)
 );
+
 create table topdawg(
   winners varchar(50) references pokemons(pokemon),
   losers varchar(50) references pokemons(pokemon),
@@ -59,9 +60,17 @@ create table topdawg(
   primary key (winners, losers)
 );
 
-
+create table topmoves(
+  pokemon varchar(50) references pokemons(pokemon),
+  best varchar(50) references moves(move),
+  second varchar(50) references moves(move),
+  third varchar(50) references moves(move),
+  primary key (pokemon)
+);
 
 
 drop table pokeAgainst;
+drop table topdawg;
+drop table topmoves;
 drop table pokemons;
 drop table moves;

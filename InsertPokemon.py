@@ -27,10 +27,18 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
     for k in moveDict:
         f.write("insert into moves (id, move, type, category, pp, power, acc) values ({}, '{}', '{}', '{}', {}, {}, {});\n".format(i, k, moveDict[k]['type'], moveDict[k]['category'], moveDict[k]['pp'], moveDict[k]['power'], moveDict[k]['acc']))
         i += 1
-    '''
+    
     for i in range(len(winners)):
-        f.write("insert into topdawg (winners, losers, hp_remain) values ('{}', '{}', {});\n".format(winners[i], losers[i], hp_remaining[i])
-    '''
-    for i in 
+        f.write("insert into topdawg (winners, losers, hp_remaining) values ('{}', '{}', {});\n".format(winners[i], losers[i], hp_remaining[i]))
+    
+    for k in range(len(topMoveDict)):
+        j = k+1
+        f.write("insert into topmoves (pokemon, best, second, third) values ('{}'".format(topMoveDict[j]['name']))
+        for i in range(len(topMoveDict[j]['top_moves'])):
+            f.write(", '{}'".format(topMoveDict[j]['top_moves'][i]))
+        fixer = 3 - len(topMoveDict[j]['top_moves'])
+        for a in range(fixer):
+            f.write(", '{}'".format(topMoveDict[j]['top_moves'][0]))
+        f.write(");\n")
 
     

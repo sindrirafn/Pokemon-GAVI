@@ -11,7 +11,7 @@ def pokeDict():
     for i in dreader:
         pokeData.append(i)
         gen1 += 1
-        if gen1 == 167:
+        if gen1 == 152:
             break
 
 
@@ -22,8 +22,7 @@ def pokeDict():
 
     gen1_data = []
     for row in pokeData:
-        if 'Mega' not in row['Name']:
-            gen1_data.append(row)
+        gen1_data.append(row)
 
     pokeDict = {}
     for i ,row in enumerate(gen1_data):

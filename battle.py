@@ -31,12 +31,12 @@ def battle(A, B): # ATH beata mogulega inn val milli att og sp_att
     pick = random.randint(0,len(topMoves[B].get('top_moves'))-1)
     moveB = topMoves[B].get('top_moves')[pick]
 
-    if moveA.get('type') in special_types:
+    if moveA in special_types:
         attackA = fighterA.get('sp_att'); defenceB = fighterB.get('sp_def')
     else:
         attackA = fighterA.get('attack'); defenceB = fighterB.get('defense')
 
-    if moveB.get('type') in special_types:
+    if moveB in special_types:
         attackB = fighterB.get('sp_att'); defenceA = fighterA.get('sp_def')
     else:
         attackB = fighterB.get('attack'); defenceA = fighterA.get('defense')

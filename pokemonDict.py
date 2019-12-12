@@ -4,7 +4,7 @@ import re
 from collections import Counter
 
 def pokeDict():
-    f = open('PokemonReal.csv')
+    f = open('pokemon-2.csv')
     dreader = csv.DictReader(f, delimiter=',')
     gen1 = 1
     pokeData = []
@@ -27,16 +27,15 @@ def pokeDict():
 
     pokeDict = {}
     for i ,row in enumerate(gen1_data):
-        pokeDict[i+1] = {'name': row.get('Name').replace("'",''),
-                    'type1': row['Type 1'],
-                    'type2': row['Type 2'],
-                    'hp': float(row['HP']),
-                    'attack': float(row['Attack']),
-                    'defense': float(row['Defense']),
-                    'sp_att': float(row['Sp. Atk']),
-                    'sp_def': float(row['Sp. Def']),
-                    'speed': float(row['Speed']),
-                    'legendary': row['Legendary']}
+        pokeDict[i+1] = {'name': row.get('name').replace("'",''),
+                    'type1': row['type1'],
+                    'type2': row['type2'],
+                    'hp': float(row['hp']),
+                    'attack': float(row['attack']),
+                    'defense': float(row['defense']),
+                    'sp_att': float(row['sp_attack']),
+                    'sp_def': float(row['sp_defense']),
+                    'speed': float(row['speed'])}
 
     pokeDict[29]['name'] = 'Nidoran-F'
     pokeDict[32]['name'] = 'Nidoran-M'
@@ -74,24 +73,24 @@ def pokeFightDict(movesGen1):
 
     for i in pokeFightData:
         pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),
-                    'Bug' : float(i['against_bug']),
-                    'Dark' : float(i['against_dark']),
-                    'Dragon' : float(i['against_dragon']),
-                    'Electric' : float(i['against_electric']),
-                    'Fairy' : float(i['against_fairy']),
-                    'Fighting' : float(i['against_fight']),
-                    'Fire' : float(i['against_fire']),
-                    'Flying' : float(i['against_flying']),
-                    'Ghost' : float(i['against_ghost']),
-                    'Grass' : float(i['against_grass']),
-                    'Ground' : float(i['against_ground']),
-                    'Ice' : float(i['against_ice']),
-                    'Normal' : float(i['against_normal']),
-                    'Poison' : float(i['against_poison']),
-                    'Psychic' : float(i['against_psychic']),
-                    'Rock' : float(i['against_rock']),
-                    'Steel' : float(i['against_steel']),
-                    'Water' : float(i['against_water']),
+                    'bug' : float(i['against_bug']),
+                    'dark' : float(i['against_dark']),
+                    'dragon' : float(i['against_dragon']),
+                    'electric' : float(i['against_electric']),
+                    'fairy' : float(i['against_fairy']),
+                    'fighting' : float(i['against_fight']),
+                    'fire' : float(i['against_fire']),
+                    'flying' : float(i['against_flying']),
+                    'ghost' : float(i['against_ghost']),
+                    'grass' : float(i['against_grass']),
+                    'ground' : float(i['against_ground']),
+                    'ice' : float(i['against_ice']),
+                    'normal' : float(i['against_normal']),
+                    'poison' : float(i['against_poison']),
+                    'psychic' : float(i['against_psychic']),
+                    'rock' : float(i['against_rock']),
+                    'steel' : float(i['against_steel']),
+                    'water' : float(i['against_water']),
                     '' : 1.0,
                     'moves': []}
 

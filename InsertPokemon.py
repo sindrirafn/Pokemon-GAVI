@@ -26,7 +26,7 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
     
     for k in range(len(pokeFight)):
         i = k+1
-        f.write("insert into pokeagainst (poke_dex, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water) values ({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});\n".format(i, pokeFight[i]['name'], pokeFight[i]['Bug'], pokeFight[i]['Dark'], pokeFight[i]['Dragon'], pokeFight[i]['Electric'], pokeFight[i]['Fairy'], pokeFight[i]['Fire'], pokeFight[i]['Flying'], pokeFight[i]['Ghost'], pokeFight[i]['Grass'], pokeFight[i]['Ground'], pokeFight[i]['Ice'], pokeFight[i]['Normal'], pokeFight[i]['Poison'], pokeFight[i]['Psychic'], pokeFight[i]['Rock'], pokeFight[i]['Steel'], pokeFight[i]['Water']))
+        f.write("insert into pokeagainst (poke_dex, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water) values ({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});\n".format(i, pokeFight[i]['name'], pokeFight[i]['bug'], pokeFight[i]['dark'], pokeFight[i]['dragon'], pokeFight[i]['electric'], pokeFight[i]['fairy'], pokeFight[i]['fire'], pokeFight[i]['flying'], pokeFight[i]['ghost'], pokeFight[i]['grass'], pokeFight[i]['ground'], pokeFight[i]['ice'], pokeFight[i]['normal'], pokeFight[i]['poison'], pokeFight[i]['psychic'], pokeFight[i]['rock'], pokeFight[i]['steel'], pokeFight[i]['water']))
     
     i = 0
     for k in moveDict:

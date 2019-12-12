@@ -53,7 +53,7 @@ create table moves(
   primary key (move)
 );
 
-create table topdawg(
+create table champ(
   id int,
   winners varchar(50) references pokemons(pokemon),
   losers varchar(50) references pokemons(pokemon),
@@ -61,7 +61,7 @@ create table topdawg(
   primary key (id, winners, losers)
 );
 
-create table topmoves(
+create table bestmoves(
   pokemon varchar(50) references pokemons(pokemon),
   best varchar(50) references moves(move),
   second varchar(50) references moves(move),
@@ -69,9 +69,18 @@ create table topmoves(
   primary key (pokemon)
 );
 
+-- "insert into tourney (id, pokemon, points) values ({}, '{}', {})
+create table tourney(
+  id int,
+  pokemon varchar(50)references pokemons(pokemon),
+  points int,
+  primary key (id, pokemon)
+);
 
+
+drop table tourney;
 drop table pokeAgainst;
-drop table topdawg;
-drop table topmoves;
+drop table champ;
+drop table bestmoves;
 drop table pokemons;
 drop table moves;

@@ -150,7 +150,7 @@ def tournament(contestants):
         winners.append(tournament_comps(winners[i-1]))
     return winners
 
-def tournamentRankingAvg(n):
+def tournamentRankingDict(n):
     pokemon_id_list = [i for i in range(1,152)]
     tournamentRankingDict = {}
     for i in range(len(pokeInfo)):

@@ -9,6 +9,8 @@ pokeFight = pokemonDict.pokeFightDict(moveDict)
 
 winners, losers, hp_remaining = battle.championship()
 
+tournDict = battle.tournamentRankingDict(20)
+
 getMovesRanked = pokemonDict.getMovesRanked(moveDict)
 topMoveDict = pokemonDict.topMoveDict(moveDict, pokeFight)
 

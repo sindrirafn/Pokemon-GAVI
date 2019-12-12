@@ -165,7 +165,7 @@ for i in range(3,6):
 '''
 winners, losers, hp_remaining = championship()
 
-winners_total, losers_total, hp_remaining_total = championshipRankingAvg(100)
+#winners_total, losers_total, hp_remaining_total = championshipRankingAvg(100)
 
 '''
 championRankingDict = {}

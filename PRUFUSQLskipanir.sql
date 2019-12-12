@@ -27,3 +27,16 @@ select p.poke_dex,
 from pokeagainst p
 group by p.poke_dex, p.pokemon, total
 order by total desc;
+
+
+select t.winners, p.type1, p.type2, count(t.winners) as most, (sum(t.hp_remaining)/count(t.winners)) as avgHP
+from topdawg t, pokemons p
+where p.pokemon = t.winners
+group by t.winners, p.type1, p.type2
+order by most desc;
+
+-- top moves frá pokemon eftir hvað það kemur oft fyrir.
+select tm.best
+from topmoves tm, pokemons p
+where
+

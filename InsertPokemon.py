@@ -7,10 +7,13 @@ poke = pokemonDict.pokeDict()
 moveDict = movesReader.import_moves()
 pokeFight = pokemonDict.pokeFightDict(moveDict)
 
-winners, losers, hp_remaining = battle.championship()
+
 
 getMovesRanked = pokemonDict.getMovesRanked(moveDict)
 topMoveDict = pokemonDict.topMoveDict(moveDict, pokeFight)
+
+winners, losers, hp_remaining = battle.championshipRankingAvg(20)
+
 
 
 with open('insertPokemon.SQL', 'w', newline='') as f: 
@@ -36,7 +39,7 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
         f.write("insert into topmoves (pokemon, best, second, third) values ('{}'".format(topMoveDict[j]['name']))
         for i in range(len(topMoveDict[j]['top_moves'])):
             f.write(", '{}'".format(topMoveDict[j]['top_moves'][i]))
-        fixer = 3 - len(topMoveDict[j]['top_moves'])
+        fixer = 3 - len(topMoveDict[j]['top_moves'])   #herna er eg ad sja til thess ad pokemons sem eru med faerri en 3 spells, fylli uppi tofluna.
         for a in range(fixer):
             f.write(", '{}'".format(topMoveDict[j]['top_moves'][0]))
         f.write(");\n")

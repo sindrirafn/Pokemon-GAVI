@@ -73,11 +73,11 @@ def pokeDict(movesGen1):
     for i in pokeFightData:
         pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),   # sum nofn eins og " Farfecht'd " voru ad valda vandraedum i 
                     'type1': i['type1'],                                                 # insertPokemon.py thannig vid losudum okkur vid " ' "
-                    'type2': i['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
-                    'hp': float(i['hp']),                     # og auðveldad bardaga hermun.
+                    'type2': i['type2'],                      
+                    'hp': float(i['hp']),                     
                     'attack': float(i['attack']),
-                    'defense': float(i['defense']),
-                    'sp_att': float(i['sp_attack']),
+                    'defense': float(i['defense']),             # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
+                    'sp_att': float(i['sp_attack']),            # og auðveldad bardaga hermun.
                     'sp_def': float(i['sp_defense']),
                     'speed': float(i['speed']),
                     'bug' : float(i['against_bug']),
@@ -115,17 +115,17 @@ def pokeDict(movesGen1):
     moves = []
     #movesGen1 = movesReader.import_moves()
     for i in pokeMovesData:
-        name = i.get('Name').replace("'",'')
-        for j in range(len(pokeFightDict)):
-            if pokeFightDict[j+1].get('name') == name:
-                moves = i['Moves'][1:len(i['Moves'])-1].split(', ')
-                for move in moves:
+        name = i.get('Name').replace("'",'')            # herna erum vid ad sja til thess ad fjarlaega " ' " úr nöfnum eins og i dictinu
+        for j in range(len(pokeFightDict)):             # fyrir ofan.
+            if pokeFightDict[j+1].get('name') == name:                  # thetta var radad i somu rod og hinar skrarnar, erum bara ad setja videigandi gogn a sinum stad.
+                moves = i['Moves'][1:len(i['Moves'])-1].split(', ')     # 'Moves' inni thessari skra var bara einn langur strengur, sem endadi a var med hornklofa 
+                for move in moves:                                      # vorum bara ad fjarlaega tha og splitta á ',' til ad auvelda samanburd.
                     l = len(move) - 1
-                    move_trimmed = move[1:l].replace("'",'')
+                    move_trimmed = move[1:l].replace("'",'')            # vorum ad losa okkur vid " ' " sem kom alltaf aukalega.
                     if move_trimmed in movesGen1:
                         pokeFightDict[j+1]['moves'].append(move_trimmed)
-                pokeFightDict[j+1]['moves']=list(set(pokeFightDict[j+1]['moves']))
-    
+                pokeFightDict[j+1]['moves']=list(set(pokeFightDict[j+1]['moves'])) # vildum hafa lista, thannig vid gerdum thetta ad set og lista til baka
+                                                                                   # til ad tvitelja ekki(sumar 'spellur' komu oft fram).
     return pokeFightDict
 
 
@@ -133,23 +133,23 @@ def getMovesRanked(moves):
     power = []; names = []
     for i in moves:
         names.append(i)
-        power.append(moves[i].get('power')*moves[i].get('acc')/100)
-    comb = list(zip(power,names))
-    comb.sort(reverse=1)
+        power.append(moves[i].get('power')*moves[i].get('acc')/100)     # Jafnan i thessari linu segir til um vaegid a hverju move-i
+    comb = list(zip(power,names))                                       # thvi sumar spell'ur gera miki dmg en med litid accuracy.
+    comb.sort(reverse=1)                                                # til ad geta radad ollu eftir styrkleika.
     moves_ranked = []
     for i in comb:
         moves_ranked.append(i[1])
-    moves_ranked.remove('SelfDestruct')
-    moves_ranked.remove('Explosion')
-    return moves_ranked
-
+    moves_ranked.remove('SelfDestruct')                                 # Thegar bardaga hermunn var tilbuinn tha var greinlegt ad 'SelfDestruct'
+    moves_ranked.remove('Explosion')                                    # og 'Explosion' voru lang bestir og margir af bestu pokemons voru med thessar
+    return moves_ranked                                                 # spellur i topmoves, sem gerdi thetta enntha meira osanngjarnt fyrir hina
+                                                                        # thannig theim var eytt ur topmoves til ad hafa bardagahermunn jafnari.
 def topMoveDict(moves, poke):
     ranked_moves = getMovesRanked(moves)
-    topMoveDict = {}
-    for i in poke:
-        top_moves=[]
-        move_count = 0
-        for move in ranked_moves:
+    topMoveDict = {}                                                    # flestir pokemonar voru med 30+ abilitys, herna erum vid ad gera bardaga
+    for i in poke:                                                      # adeins marktaekari, med thvi ad finna hver 3 bestu abilitys eru og bua til
+        top_moves=[]                                                    # lista yfir "Best moves" sem hver og einn pokemon er med.
+        move_count = 0                                                  # Sidan i hermunn mun pokemon velja eitt bragd af slembi til ad nota i hverjum
+        for move in ranked_moves:                                       # bardaga.
             if move in poke[i].get('moves'):
                 top_moves.append(move)
                 move_count += 1

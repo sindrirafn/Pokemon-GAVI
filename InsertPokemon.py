@@ -3,14 +3,14 @@ import pokemonDict
 import movesReader
 import battle
 
-poke = pokemonDict.pokeDict()
+#poke = pokemonDict.pokeDict()
 moveDict = movesReader.import_moves()
-pokeFight = pokemonDict.pokeFightDict(moveDict)
+poke = pokemonDict.pokeDict(moveDict)
 
 
 
 getMovesRanked = pokemonDict.getMovesRanked(moveDict)
-topMoveDict = pokemonDict.topMoveDict(moveDict, pokeFight)
+topMoveDict = pokemonDict.topMoveDict(moveDict, poke)
 
 tournDict = battle.tournamentRankingDict(20)
 
@@ -24,9 +24,9 @@ with open('insertPokemon.SQL', 'w', newline='') as f:
         i = k+1
         f.write("insert into pokemons (poke_dex, pokemon, type1, type2, hp, attack, defense, sp_att, sp_def, speed) values ({}, '{}', '{}', '{}', {}, {}, {}, {}, {}, {});\n".format(i, poke[i]['name'], poke[i]['type1'], poke[i]['type2'], poke[i]['hp'], poke[i]['attack'], poke[i]['defense'], poke[i]['sp_att'], poke[i]['sp_def'], poke[i]['speed']))
     
-    for k in range(len(pokeFight)):
+    for k in range(len(poke)):
         i = k+1
-        f.write("insert into pokeagainst (poke_dex, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water) values ({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});\n".format(i, pokeFight[i]['name'], pokeFight[i]['bug'], pokeFight[i]['dark'], pokeFight[i]['dragon'], pokeFight[i]['electric'], pokeFight[i]['fairy'], pokeFight[i]['fire'], pokeFight[i]['flying'], pokeFight[i]['ghost'], pokeFight[i]['grass'], pokeFight[i]['ground'], pokeFight[i]['ice'], pokeFight[i]['normal'], pokeFight[i]['poison'], pokeFight[i]['psychic'], pokeFight[i]['rock'], pokeFight[i]['steel'], pokeFight[i]['water']))
+        f.write("insert into pokeagainst (poke_dex, pokemon, Bug, Dark, Dragon, Electric, Fairy, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water) values ({}, '{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});\n".format(i, poke[i]['name'], poke[i]['bug'], poke[i]['dark'], poke[i]['dragon'], poke[i]['electric'], poke[i]['fairy'], poke[i]['fire'], poke[i]['flying'], poke[i]['ghost'], poke[i]['grass'], poke[i]['ground'], poke[i]['ice'], poke[i]['normal'], poke[i]['poison'], poke[i]['psychic'], poke[i]['rock'], poke[i]['steel'], poke[i]['water']))
     
     i = 0
     for k in moveDict:

@@ -79,7 +79,7 @@ def pokeDict(movesGen1):
                     'defense': float(row['defense']),
                     'sp_att': float(row['sp_attack']),
                     'sp_def': float(row['sp_defense']),
-                    'speed': float(row['speed'])
+                    'speed': float(row['speed']),
                     'bug' : float(i['against_bug']),
                     'dark' : float(i['against_dark']),
                     'dragon' : float(i['against_dragon']),

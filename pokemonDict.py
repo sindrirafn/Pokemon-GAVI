@@ -2,7 +2,7 @@ import movesReader
 import csv
 import re
 from collections import Counter
-
+'''
 def pokeDict():
     f = open('pokemon-2.csv')
     dreader = csv.DictReader(f, delimiter=',')
@@ -11,8 +11,8 @@ def pokeDict():
     for i in dreader:
         pokeData.append(i)
         gen1 += 1
-        if gen1 == 152:
-            break
+        if gen1 == 152:                 # i thessari forlykkju erum við að sjá til þess að allir pokemons frá genaration 1 komi inn
+            break                       # og ekki fleiri en það.
 
 
     f.close()
@@ -28,33 +28,33 @@ def pokeDict():
     for i ,row in enumerate(gen1_data):
         pokeDict[i+1] = {'name': row.get('name').replace("'",''),
                     'type1': row['type1'],
-                    'type2': row['type2'],
-                    'hp': float(row['hp']),
+                    'type2': row['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
+                    'hp': float(row['hp']),                     # og auðveldad bardaga hermun.
                     'attack': float(row['attack']),
                     'defense': float(row['defense']),
                     'sp_att': float(row['sp_attack']),
                     'sp_def': float(row['sp_defense']),
                     'speed': float(row['speed'])}
 
-    pokeDict[29]['name'] = 'Nidoran-F'
-    pokeDict[32]['name'] = 'Nidoran-M'
-    
+    pokeDict[29]['name'] = 'Nidoran-F'                          # thessi tvo nofn voru med ♀ og ♂ sem tilgreindi kyn
+    pokeDict[32]['name'] = 'Nidoran-M'                          # thad var ad valda okkur villu meldingar thvi their voru ekki
+                                                                # med thessi merki i odru gagnasafni sem vid vorum ad nota
     return pokeDict
 
 # ----------------------------
+'''
 
 
 
-
-def pokeFightDict(movesGen1):
+def pokeDict(movesGen1):
     f = open('pokemon-2.csv')
     dreader = csv.DictReader(f, delimiter=',')
     pokeFightData = []
     gen1 = 1
     for i in dreader:
         pokeFightData.append(i)
-        gen1 += 1
-        if gen1 == 152:
+        gen1 += 1                   # i thessari forlykkju erum við að sjá til þess að allir pokemons frá genaration 1 komi inn
+        if gen1 == 152:             # og ekki fleiri en þad
             break
     f.close()
 
@@ -72,6 +72,14 @@ def pokeFightDict(movesGen1):
 
     for i in pokeFightData:
         pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),
+                    'type1': row['type1'],
+                    'type2': row['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
+                    'hp': float(row['hp']),                     # og auðveldad bardaga hermun.
+                    'attack': float(row['attack']),
+                    'defense': float(row['defense']),
+                    'sp_att': float(row['sp_attack']),
+                    'sp_def': float(row['sp_defense']),
+                    'speed': float(row['speed'])
                     'bug' : float(i['against_bug']),
                     'dark' : float(i['against_dark']),
                     'dragon' : float(i['against_dragon']),
@@ -82,12 +90,12 @@ def pokeFightDict(movesGen1):
                     'flying' : float(i['against_flying']),
                     'ghost' : float(i['against_ghost']),
                     'grass' : float(i['against_grass']),
-                    'ground' : float(i['against_ground']),
+                    'ground' : float(i['against_ground']), 
                     'ice' : float(i['against_ice']),
                     'normal' : float(i['against_normal']),
                     'poison' : float(i['against_poison']),
-                    'psychic' : float(i['against_psychic']),
-                    'rock' : float(i['against_rock']),
+                    'psychic' : float(i['against_psychic']), 
+                    'rock' : float(i['against_rock']), 
                     'steel' : float(i['against_steel']),
                     'water' : float(i['against_water']),
                     '' : 1.0,
@@ -134,7 +142,7 @@ def getMovesRanked(moves):
     moves_ranked.remove('Explosion')
     return moves_ranked
 
-def topMoveDict(moves, pokeFight):
+def topMoveDict(moves, poke):
     ranked_moves = getMovesRanked(moves)
     topMoveDict = {}
     for i in pokeFight:

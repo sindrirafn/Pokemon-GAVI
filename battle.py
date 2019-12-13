@@ -290,4 +290,4 @@ def tournamentRankingDict(n):
                 tournamentRankingDict[j]['points'] += i+1
     return tournamentRankingDict
 
-battle_showcase()
+championship()

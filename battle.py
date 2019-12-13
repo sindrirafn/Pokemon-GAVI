@@ -2,6 +2,7 @@ import pokemonDict
 import movesReader
 import random
 from collections import Counter
+import time
 
 
 moves = movesReader.import_moves()
@@ -12,7 +13,7 @@ topMoves = pokemonDict.topMoveDict(moves, pokeFight)
 def accuracy(accuracy):
     return(random.randint(1,100)<accuracy)
 
-def battle(A, B): # ATH beata mogulega inn val milli att og sp_att
+def battle(A, B): 
     
     special_types = ['Water', 'Grass', 'Fire', 'Ice', 'Electric', 'Psychic', 'Dragon', 'Dark']
 
@@ -71,7 +72,115 @@ def battle(A, B): # ATH beata mogulega inn val milli att og sp_att
         return fighterB, fighterB_id, fighterA, fighterA_id, hpB
     elif hpB <= 0:
         return fighterA, fighterA_id, fighterB, fighterB_id, hpA
-    
+
+def battle_showcase(): 
+    print(' \n')
+    nameA = input("Enter the first pokémon's name: ")
+    nameB = input("Enter the second pokémon's name: ")
+    print('\n\n- - -\n')
+    for i in range(1,152):
+        if nameA == pokeInfo[i].get('name'): A = i
+        if nameB == pokeInfo[i].get('name'): B = i
+
+    print(pokeInfo[A].get('name'),'vs.', pokeInfo[B].get('name'),'!!\n')
+    time.sleep(2)
+
+    special_types = ['Water', 'Grass', 'Fire', 'Ice', 'Electric', 'Psychic', 'Dragon', 'Dark']
+
+    if pokeInfo.get(A)['speed'] > pokeInfo.get(B)['speed']:
+        fighterA = pokeInfo.get(A); fighterB = pokeInfo.get(B)
+        movesA = pokeFight.get(A); movesB = pokeFight.get(B)
+        fighterA_id = A; fighterB_id = B
+    else:
+        fighterA = pokeInfo.get(B); fighterB = pokeInfo.get(A)
+        movesA = pokeFight.get(B); movesB = pokeFight.get(A)
+        fighterA_id = B; fighterB_id = A
+
+    hpA = fighterA.get('hp'); hpB = fighterB.get('hp')
+
+    while hpA > 0 and hpB > 0:
+
+        pick = random.randint(0,len(topMoves[A].get('top_moves'))-1)
+        moveA = topMoves[A].get('top_moves')[pick] 
+        pick = random.randint(0,len(topMoves[B].get('top_moves'))-1)
+        moveB = topMoves[B].get('top_moves')[pick]
+
+        if moveA in special_types:
+            attackA = fighterA.get('sp_att'); defenceB = fighterB.get('sp_def')
+        else:
+            attackA = fighterA.get('attack'); defenceB = fighterB.get('defense')
+
+        if moveB in special_types:
+            attackB = fighterB.get('sp_att'); defenceA = fighterA.get('sp_def')
+        else:
+            attackB = fighterB.get('attack'); defenceA = fighterA.get('defense')
+        
+
+        attPowA =  moves[moveA].get('power'); attPowB =  moves[moveB].get('power')
+                            
+        modA = movesB.get(fighterA.get('type1')) * movesB.get(fighterA.get('type2'))
+        if modA == 0.0:
+            modA = 0.1
+        dmgA = round(((((2/5 + 2)*attPowA*attackA/defenceB) / 50) + 2) * modA)
+        
+        modB = movesA.get(fighterB.get('type1')) * movesA.get(fighterB.get('type2'))
+        if modB == 0.0:
+            modB = 0.1
+        dmgB = round(((((2/5 + 2)*attPowB*attackB/defenceA) / 50) + 2) * modB)
+
+        # Fighter 1 turn
+        print('- - -\n\n')
+        time.sleep(1)
+        print(fighterA.get('name'), 'uses', moveA,'. ',end='')
+        if accuracy(moves[moveA].get('acc')):
+            hpB -= dmgA
+            print('It hurts ', fighterB.get('name'), ' by ', str(dmgA), 'HP! \n\n')
+
+            time.sleep(1)
+            if hpB <= 0:
+                hpB = 0
+                print(fighterA.get('name'),': ', str(int(hpA)),'HP  - ',fighterB.get('name'),': ', str(int(hpB)),'HP\n')
+                time.sleep(1)
+                break
+        else:
+            print('It misses \n\n')
+            time.sleep(1)
+        
+
+        # Fighter 2 turn
+        print(fighterB.get('name'), 'uses', moveB,'. ',end='')
+
+        if accuracy(moves[moveB].get('acc')):
+            hpA -= dmgB
+            print('It hurts ', fighterA.get('name'), ' by ', str(dmgB), 'HP!\n\n')
+            time.sleep(1)
+        else:
+            print('It misses \n\n')
+            time.sleep(1)
+
+        
+ 
+        if hpA < 0 : hpA = 0
+        if hpB < 0 : hpB = 0
+        print(fighterA.get('name'),': ', str(int(hpA)),'HP  - ',fighterB.get('name'),': ', str(int(hpB)),'HP\n')
+        time.sleep(1)
+
+    if hpA <= 0:
+        print('- - -\n\n')
+        time.sleep(1)
+        print(fighterA.get('name'), 'fainted... \n')
+        time.sleep(1)
+        print(fighterB.get('name'), 'wins!! \n')
+        time.sleep(3)
+        return
+    elif hpB <= 0:
+        print('- - -\n\n')
+        time.sleep(1)
+        print(fighterB.get('name'), 'fainted... \n')
+        time.sleep(1)
+        print(fighterA.get('name'), 'wins!! \n')
+        time.sleep(3)
+        return   
 
 def championship(): 
     winners = []; losers=[]
@@ -182,3 +291,4 @@ def tournamentRankingDict(n):
                 tournamentRankingDict[j]['points'] += i+1
     return tournamentRankingDict
 
+battle_showcase()

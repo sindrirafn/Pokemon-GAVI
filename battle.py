@@ -6,9 +6,8 @@ import time
 
 
 moves = movesReader.import_moves()
-pokeInfo = pokemonDict.pokeDict()
-pokeFight = pokemonDict.pokeFightDict(moves)
-topMoves = pokemonDict.topMoveDict(moves, pokeFight)
+pokeDict = pokemonDict.pokeDict(moves)
+topMoves = pokemonDict.topMoveDict(moves, pokeDict)
 
 def accuracy(accuracy):
     return(random.randint(1,100)<accuracy)
@@ -17,13 +16,13 @@ def battle(A, B):
     
     special_types = ['Water', 'Grass', 'Fire', 'Ice', 'Electric', 'Psychic', 'Dragon', 'Dark']
 
-    if pokeInfo.get(A)['speed'] > pokeInfo.get(B)['speed']:
-        fighterA = pokeInfo.get(A); fighterB = pokeInfo.get(B)
-        movesA = pokeFight.get(A); movesB = pokeFight.get(B)
+    if pokeDict.get(A)['speed'] > pokeDict.get(B)['speed']:
+        fighterA = pokeDict.get(A); fighterB = pokeDict.get(B)
+        movesA = pokeDict.get(A); movesB = pokeDict.get(B)
         fighterA_id = A; fighterB_id = B
     else:
-        fighterA = pokeInfo.get(B); fighterB = pokeInfo.get(A)
-        movesA = pokeFight.get(B); movesB = pokeFight.get(A)
+        fighterA = pokeDict.get(B); fighterB = pokeDict.get(A)
+        movesA = pokeDict.get(B); movesB = pokeDict.get(A)
         fighterA_id = B; fighterB_id = A
 
     hpA = fighterA.get('hp'); hpB = fighterB.get('hp')
@@ -79,21 +78,21 @@ def battle_showcase():
     nameB = input("Enter the second pokémon's name: ")
     print('\n\n- - -\n')
     for i in range(1,152):
-        if nameA == pokeInfo[i].get('name'): A = i
-        if nameB == pokeInfo[i].get('name'): B = i
+        if nameA == pokeDict[i].get('name'): A = i
+        if nameB == pokeDict[i].get('name'): B = i
 
-    print(pokeInfo[A].get('name'),'vs.', pokeInfo[B].get('name'),'!!\n')
+    print(pokeDict[A].get('name'),'vs.', pokeDict[B].get('name'),'!!\n')
     time.sleep(2)
 
     special_types = ['Water', 'Grass', 'Fire', 'Ice', 'Electric', 'Psychic', 'Dragon', 'Dark']
 
-    if pokeInfo.get(A)['speed'] > pokeInfo.get(B)['speed']:
-        fighterA = pokeInfo.get(A); fighterB = pokeInfo.get(B)
-        movesA = pokeFight.get(A); movesB = pokeFight.get(B)
+    if pokeDict.get(A)['speed'] > pokeDict.get(B)['speed']:
+        fighterA = pokeDict.get(A); fighterB = pokeDict.get(B)
+        movesA = pokeDict.get(A); movesB = pokeDict.get(B)
         fighterA_id = A; fighterB_id = B
     else:
-        fighterA = pokeInfo.get(B); fighterB = pokeInfo.get(A)
-        movesA = pokeFight.get(B); movesB = pokeFight.get(A)
+        fighterA = pokeDict.get(B); fighterB = pokeDict.get(A)
+        movesA = pokeDict.get(B); movesB = pokeDict.get(A)
         fighterA_id = B; fighterB_id = A
 
     hpA = fighterA.get('hp'); hpB = fighterB.get('hp')
@@ -185,8 +184,8 @@ def battle_showcase():
 def championship(): 
     winners = []; losers=[]
     hp_remaining = []
-    for i in range(1,len(pokeInfo)):
-        for j in range(i+1,len(pokeInfo)+1):
+    for i in range(1,len(pokeDict)):
+        for j in range(i+1,len(pokeDict)+1):
             winner, winner_id, loser, loser_id, hp = battle(i,j)
             winners.append(winner.get('name'))
             losers.append(loser.get('name'))
@@ -209,7 +208,7 @@ def championshipRankingAvg(n):
 
 
 
-def round_one_draft(pokeInfo):
+def round_one_draft(pokeDict):
     brackets = []; bracket = []
     pokemon_id_list = [i for i in range(1,152)]
     picks = random.sample(pokemon_id_list,6)
@@ -270,13 +269,13 @@ def tournament(contestants):
 
 def tournamentRankingDict(n):
     tournamentRankingDict = {}
-    for i in range(len(pokeInfo)):
+    for i in range(len(pokeDict)):
         tournamentRankingDict[i+1] = {
-            'name' : pokeInfo[i+1].get('name'),
+            'name' : pokeDict[i+1].get('name'),
             'points' : 0
             }
     for i in range(n):
-        brackets = round_one_draft(pokeInfo)
+        brackets = round_one_draft(pokeDict)
         contestants = round_one_comp(brackets)
         champs = tournament(contestants)
         champs.reverse()

@@ -71,15 +71,15 @@ def pokeDict(movesGen1):
     pokeFightDict = {}
 
     for i in pokeFightData:
-        pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),
-                    'type1': row['type1'],
-                    'type2': row['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
-                    'hp': float(row['hp']),                     # og auðveldad bardaga hermun.
-                    'attack': float(row['attack']),
-                    'defense': float(row['defense']),
-                    'sp_att': float(row['sp_attack']),
-                    'sp_def': float(row['sp_defense']),
-                    'speed': float(row['speed']),
+        pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),   # sum nofn eins og " Farfecht'd " voru ad valda vandraedum i 
+                    'type1': i['type1'],                                               # 
+                    'type2': i['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
+                    'hp': float(i['hp']),                     # og auðveldad bardaga hermun.
+                    'attack': float(i['attack']),
+                    'defense': float(i['defense']),
+                    'sp_att': float(i['sp_attack']),
+                    'sp_def': float(i['sp_defense']),
+                    'speed': float(i['speed']),
                     'bug' : float(i['against_bug']),
                     'dark' : float(i['against_dark']),
                     'dragon' : float(i['against_dragon']),
@@ -101,8 +101,9 @@ def pokeDict(movesGen1):
                     '' : 1.0,
                     'moves': []}
 
-    pokeFightDict[29]['name'] = 'Nidoran-F'
-    pokeFightDict[32]['name'] = 'Nidoran-M'
+    pokeDict[29]['name'] = 'Nidoran-F'                          # thessi tvo nofn voru med ♀ og ♂ sem tilgreindi kyn
+    pokeDict[32]['name'] = 'Nidoran-M'                          # thad var ad valda okkur villu meldingar thvi their voru ekki
+                                                                # med thessi merki i odru gagnasafni sem vid vorum ad nota
     
     f = open('pokemon-data.csv')
     dreader = csv.DictReader(f, delimiter=';')
@@ -145,17 +146,17 @@ def getMovesRanked(moves):
 def topMoveDict(moves, poke):
     ranked_moves = getMovesRanked(moves)
     topMoveDict = {}
-    for i in pokeFight:
+    for i in poke:
         top_moves=[]
         move_count = 0
         for move in ranked_moves:
-            if move in pokeFight[i].get('moves'):
+            if move in poke[i].get('moves'):
                 top_moves.append(move)
                 move_count += 1
             if move_count == 3:
                 break
         topMoveDict[i] = {
-            'name': pokeFight[i].get('name'),
+            'name': poke[i].get('name'),
             'top_moves': top_moves
         }
 

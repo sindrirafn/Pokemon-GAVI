@@ -72,7 +72,7 @@ def pokeDict(movesGen1):
 
     for i in pokeFightData:
         pokeFightDict[int(i['pokedex_number'])] = {'name' : i['name'].replace("'",''),   # sum nofn eins og " Farfecht'd " voru ad valda vandraedum i 
-                    'type1': i['type1'],                                               # 
+                    'type1': i['type1'],                                                 # insertPokemon.py thannig vid losudum okkur vid " ' "
                     'type2': i['type2'],                      # þetta dict er sett upp til ad geta buid til thaeginlegt table fyrir SQL
                     'hp': float(i['hp']),                     # og auðveldad bardaga hermun.
                     'attack': float(i['attack']),
@@ -101,8 +101,8 @@ def pokeDict(movesGen1):
                     '' : 1.0,
                     'moves': []}
 
-    pokeDict[29]['name'] = 'Nidoran-F'                          # thessi tvo nofn voru med ♀ og ♂ sem tilgreindi kyn
-    pokeDict[32]['name'] = 'Nidoran-M'                          # thad var ad valda okkur villu meldingar thvi their voru ekki
+    pokeFightDict[29]['name'] = 'Nidoran-F'                          # thessi tvo nofn voru med ♀ og ♂ sem tilgreindi kyn
+    pokeFightDict[32]['name'] = 'Nidoran-M'                          # thad var ad valda okkur villu meldingar thvi their voru ekki
                                                                 # med thessi merki i odru gagnasafni sem vid vorum ad nota
     
     f = open('pokemon-data.csv')

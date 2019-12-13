@@ -1,6 +1,6 @@
 *.pyc
 *.pyo
-
+insertPokemon.sql
 __pycache__/
 *.pyc
 *.pyo
